@@ -31,7 +31,20 @@
             assertPasswordResult(assert, result, expected);
         });
 
-        QUnit.test('2: A1!', function (assert) {
+        QUnit.test('2: Abcd??ef1!!', function (assert) {
+            const password = 'Abcd??ef1!!';
+            const result = validatePassword(password);
+            const expected = {
+                isValidLength: true,
+                hasUppercaseLetter: true,
+                hasLowercaseLetter: true,
+                hasDigit: true,
+                hasSpecialCharacter: true                
+            };
+            assertPasswordResult(assert, result, expected);
+        });
+
+        QUnit.test('3: A1!', function (assert) {
             const password = 'A1!';
             const result = validatePassword(password);
             const expected = {
@@ -44,7 +57,7 @@
             assertPasswordResult(assert, result, expected);
         });
 
-        QUnit.test('3: abcdef1!', function (assert) {
+        QUnit.test('4: abcdef1!', function (assert) {
             const password = 'abcdef1!';
             const result = validatePassword(password);
             const expected = {
@@ -57,7 +70,7 @@
             assertPasswordResult(assert, result, expected);
         });
 
-        QUnit.test('4: ABCDEF1!', function (assert) {
+        QUnit.test('5: ABCDEF1!', function (assert) {
             const password = 'ABCDEF1!';
             const result = validatePassword(password);
             const expected = {
@@ -70,7 +83,7 @@
             assertPasswordResult(assert, result, expected);
         });
 
-        QUnit.test('5: Abcdefg!', function (assert) {
+        QUnit.test('6: Abcdefg!', function (assert) {
             const password = 'Abcdefg!';
             const result = validatePassword(password);
             const expected = {
@@ -83,7 +96,7 @@
             assertPasswordResult(assert, result, expected);
         });
 
-        QUnit.test('6: Abcdefg1', function (assert) {
+        QUnit.test('7: Abcdefg1', function (assert) {
             const password = 'Abcdefg1';
             const result = validatePassword(password);
             const expected = {
@@ -96,7 +109,7 @@
             assertPasswordResult(assert, result, expected);
         });
 
-        QUnit.test('7: Abcdefghij1234567890!ABCDEFGH', function (assert) {
+        QUnit.test('8: Abcdefghij1234567890!ABCDEFGH', function (assert) {
             const password = 'Abcdefghij1234567890!ABCDEFGH';
             const result = validatePassword(password);
             const expected = {
@@ -109,7 +122,7 @@
             assertPasswordResult(assert, result, expected);
         });
 
-        QUnit.test('8: ', function (assert) {
+        QUnit.test('9: ', function (assert) {
             const password = '';
             const result = validatePassword(password);
             const expected = {
@@ -122,7 +135,7 @@
             assertPasswordResult(assert, result, expected);
         });
 
-        QUnit.test('9: Abc def1', function (assert) {
+        QUnit.test('10: Abc def1', function (assert) {
             const password = 'Abc def1';
             const result = validatePassword(password);
             const expected = {
