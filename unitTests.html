@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<title>QUnit</title>
+<link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.22.0.css">
+
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.22.0.js"></script>
+    <script>
+        function assertPasswordResult(assert, result, expected) {
+            assert.strictEqual(result.isValidLength, expected.isValidLength, "Lengde er korrekt");
+            assert.strictEqual(result.hasUppercaseLetters, expected.hasUppercaseLetters, "Har stor bokstav");
+            assert.strictEqual(result.hasLowercaseLetters, expected.hasLowercaseLetters, "Har liten bokstav");
+            assert.strictEqual(result.hasDigit, expected.hasDigit, "Har tall");
+            assert.strictEqual(result.hasSpecialCharacter, expected.hasSpecialCharacter, "Har spesialtegn");
+            assert.strictEqual(result.isValid, expected.isValid, "Er gyldig passord");
+        }
+
+        QUnit.test('1: Abcdef1!', function (assert) {
+            const password = 'Abcdef1!';
+            const result = validatePassword(password);
+            const expected = {
+                isValidLength: true,
+                hasUppercaseLetter: true,
+                hasLowercaseLetter: true,
+                hasDigit: true,
+                hasSpecialCharacter: true,
+                isValid: true
+            };
+            assertPasswordResult(assert, result, expected);
+        });
+
+        QUnit.test('2: A1!', function (assert) {
+            const password = 'A1!';
+            const result = validatePassword(password);
+            const expected = {
+                isValidLength: false,
+                hasUppercaseLetter: true,
+                hasLowercaseLetter: false,
+                hasDigit: true,
+                hasSpecialCharacter: true,
+                isValid: false
+            };
+            assertPasswordResult(assert, result, expected);
+        });
+
+        QUnit.test('3: abcdef1!', function (assert) {
+            const password = 'abcdef1!';
+            const result = validatePassword(password);
+            const expected = {
+                isValidLength: true,
+                hasUppercaseLetter: false,
+                hasLowercaseLetter: true,
+                hasDigit: true,
+                hasSpecialCharacter: true,
+                isValid: false
+            };
+            assertPasswordResult(assert, result, expected);
+        });
+
+        QUnit.test('4: ABCDEF1!', function (assert) {
+            const password = 'ABCDEF1!';
+            const result = validatePassword(password);
+            const expected = {
+                isValidLength: true,
+                hasUppercaseLetter: true,
+                hasLowercaseLetter: false,
+                hasDigit: true,
+                hasSpecialCharacter: true,
+                isValid: false
+            };
+            assertPasswordResult(assert, result, expected);
+        });
+
+        QUnit.test('5: Abcdefg!', function (assert) {
+            const password = 'Abcdefg!';
+            const result = validatePassword(password);
+            const expected = {
+                isValidLength: true,
+                hasUppercaseLetter: true,
+                hasLowercaseLetter: true,
+                hasDigit: false,
+                hasSpecialCharacter: true,
+                isValid: false
+            };
+            assertPasswordResult(assert, result, expected);
+        });
+
+        QUnit.test('6: Abcdefg1', function (assert) {
+            const password = 'Abcdefg1';
+            const result = validatePassword(password);
+            const expected = {
+                isValidLength: true,
+                hasUppercaseLetter: true,
+                hasLowercaseLetter: true,
+                hasDigit: true,
+                hasSpecialCharacter: false,
+                isValid: false
+            };
+            assertPasswordResult(assert, result, expected);
+        });
+
+        QUnit.test('7: Abcdefghij1234567890!ABCDEFGH', function (assert) {
+            const password = 'Abcdefghij1234567890!ABCDEFGH';
+            const result = validatePassword(password);
+            const expected = {
+                isValidLength: true,
+                hasUppercaseLetter: true,
+                hasLowercaseLetter: true,
+                hasDigit: true,
+                hasSpecialCharacter: true,
+                isValid: true
+            };
+            assertPasswordResult(assert, result, expected);
+        });
+
+        QUnit.test('8: ', function (assert) {
+            const password = '';
+            const result = validatePassword(password);
+            const expected = {
+                isValidLength: false,
+                hasUppercaseLetter: false,
+                hasLowercaseLetter: false,
+                hasDigit: false,
+                hasSpecialCharacter: false,
+                isValid: false
+            };
+            assertPasswordResult(assert, result, expected);
+        });
+
+
+
+    </script>
+</body>
+
+</html>
