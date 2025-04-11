@@ -1,4 +1,4 @@
-function validatePassword() {
+function validatePassword(password) {
     return {
         isValidLength: true, // true hvis passordet er mellom 8 og 32 tegn
         hasUppercaseLetter: true, // true hvis det er minst en stor bokstav
